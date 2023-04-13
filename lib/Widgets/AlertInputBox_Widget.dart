@@ -1,32 +1,27 @@
 import 'package:flutter/material.dart';
 
-//custom Dialog
-Future<bool?> showCustomDialog(
+Future<bool?> showDialogInput(
     {required BuildContext context,
     required String title,
     required String body,
-    required Color color,
     required String cancel,
     required String confirm,
+    required Color color,
     String? cancelText,
     String? confirmText,
     bool needConfirm = true}) async {
   return showDialog<bool>(
-    context: context,
-    barrierDismissible: false,
-    builder: (_) {
-      return _CustomAlert(
-        color: color,
-        title: title,
-        msg: body,
-        needConfirm: needConfirm,
-        cancel: cancel,
-        confirm: confirm,
-        cancelText: cancelText ?? cancel,
-        confirmText: confirmText ?? confirm,
-      );
-    },
-  );
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return _CustomAlert(
+            color: color,
+            title: title,
+            needConfirm: needConfirm,
+            msg: body,
+            cancel: cancelText ?? cancel,
+            confirm: confirmText ?? confirm);
+      });
 }
 
 class _CustomAlert extends StatelessWidget {
@@ -48,6 +43,7 @@ class _CustomAlert extends StatelessWidget {
   final bool needConfirm;
   final String? cancelText;
   final String? confirmText;
+  TextEditingController input = TextEditingController();
 
   Widget _buttons(context) {
     if (needConfirm) {
@@ -124,8 +120,16 @@ class _CustomAlert extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(msg),
-                  )
+                  ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: input,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), hintText: 'Digite aqui'),
               ),
             ),
             Padding(

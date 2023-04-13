@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smokerstabacaria/Widgets/AlertInputBox_Widget.dart';
 import 'package:smokerstabacaria/Widgets/Alertbox_Widget.dart';
 
 class MainPage extends StatelessWidget {
@@ -23,6 +24,7 @@ class MainPage extends StatelessWidget {
                 child: Text('Show Dialog ERROR'),
                 onPressed: () {
                   showCustomDialog(
+                    color: Colors.black,
                     context: context,
                     cancel: 'Cancel',
                     confirm: 'confirm',
@@ -32,12 +34,13 @@ class MainPage extends StatelessWidget {
                   );
                 }),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           Center(
             child: TextButton(
                 child: Text('Show Dialog Confirm'),
                 onPressed: () {
                   showCustomDialog(
+                    color: Colors.black,
                     context: context,
                     cancel: 'Cancelar',
                     confirm: 'Confirmar',
@@ -53,6 +56,7 @@ class MainPage extends StatelessWidget {
                 child: Text('Teste aleatorio'),
                 onPressed: () {
                   showCustomDialog(
+                    color: Colors.black,
                     context: context,
                     cancel: 'erro aleatorio',
                     confirm: 'confirmar aleatorio',
@@ -67,18 +71,14 @@ class MainPage extends StatelessWidget {
             child: TextButton(
               child: Text('dialog'),
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) => CustomAlertDialogWithInput(
-                    title: 'what description do you want?',
-                    hintText: 'description',
-                    cancelText: 'Cancel',
-                    confirmText: 'Confirm',
-                    textEditingController: dialogResponse,
-                  ),
-                ).then((value) {
-                  if (value != null && value.isNotEmpty) {}
-                });
+                showDialogInput(
+                    context: context,
+                    title: 'Teste',
+                    body: 'motivo',
+                    cancel: 'cancel',
+                    confirm: 'confirm',
+                    color: Colors.black,
+                    );
               },
             ),
           )
