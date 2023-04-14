@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smokerstabacaria/Widgets/AlertConfirm_Widget.dart';
+import 'package:smokerstabacaria/Widgets/AlertError_Widget.dart';
 import 'package:smokerstabacaria/Widgets/AlertInputBox_Widget.dart';
-import 'package:smokerstabacaria/Widgets/Alertbox_Widget.dart';
+import 'package:smokerstabacaria/Widgets/AlertCustom_Widget.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -13,63 +15,34 @@ class MainPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Smokers Tabacaria'),
+        title: Text('Componentization'),
       ),
       body: Column(
         children: [
-          SizedBox(height: 10),
-          Text('Nome'),
           Center(
             child: TextButton(
-                child: Text('Show Dialog ERROR'),
-                onPressed: () {
-                  showCustomDialog(
-                    color: Colors.black,
-                    context: context,
-                    cancel: 'Cancel',
-                    confirm: 'confirm',
-                    title: 'Error',
-                    body: '${Error}',
-                    needConfirm: false,
-                  );
-                }),
+              child: Text('Confirm Alert'),
+              onPressed: () {
+                showConfirmDialog(context: context, title: 'Are you sure?');
+              },
+            ),
           ),
           SizedBox(height: 10),
           Center(
             child: TextButton(
-                child: Text('Show Dialog Confirm'),
-                onPressed: () {
-                  showCustomDialog(
-                    color: Colors.black,
+              child: Text('Alert Error'),
+              onPressed: () {
+                showErrorDialog(
                     context: context,
-                    cancel: 'Cancelar',
-                    confirm: 'Confirmar',
-                    title: 'are you sure ?',
-                    body: 'are you sure you want to confirm?',
-                    needConfirm: true,
-                  );
-                }),
+                    title: 'Error!!',
+                    msg: 'Error in this Alert');
+              },
+            ),
           ),
           SizedBox(height: 10),
           Center(
             child: TextButton(
-                child: Text('Teste aleatorio'),
-                onPressed: () {
-                  showCustomDialog(
-                    color: Colors.black,
-                    context: context,
-                    cancel: 'erro aleatorio',
-                    confirm: 'confirmar aleatorio',
-                    title: 'titulo aleatorio',
-                    body: 'body aleatorio',
-                    needConfirm: true,
-                  );
-                }),
-          ),
-          SizedBox(height: 10),
-          Center(
-            child: TextButton(
-              child: Text('dialog'),
+              child: Text('Input Alert'),
               onPressed: () {
                 showDialogInput(
                   context: context,

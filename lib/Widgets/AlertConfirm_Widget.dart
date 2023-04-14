@@ -1,43 +1,37 @@
 import 'package:flutter/material.dart';
 
-Future<String?> showDialogInput({
+Future<bool?> showConfirmDialog({
   required BuildContext context,
   required String title,
-  required String body,
 }) async {
-  return showDialog<String>(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) {
-        return _CustomAlert(
-          title: title,
-          msg: body,
-        );
-      });
+  return showDialog<bool>(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) {
+      return _CustomAlert(
+        title: title,
+      );
+    },
+  );
 }
 
 class _CustomAlert extends StatelessWidget {
   _CustomAlert({
     required this.title,
-    required this.msg,
   });
 
   final String title;
-  final String msg;
-  TextEditingController _input = TextEditingController();
 
   Widget _buttons(context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
           child: SizedBox(
             height: 45,
             child: TextButton(
-              child: Text("Cancelar"),
-              onPressed: () {
-                _input.clear();
-                Navigator.pop(context);
-              },
+              child: Text('Não'),
+              onPressed: () => Navigator.pop(context, false),
             ),
           ),
         ),
@@ -46,8 +40,8 @@ class _CustomAlert extends StatelessWidget {
           child: SizedBox(
             height: 45,
             child: TextButton(
-              child: Text('Ok'),
-              onPressed: () => Navigator.pop(context),
+              child: Text('Sim'),
+              onPressed: () => Navigator.pop(context, true),
             ),
           ),
         ),
@@ -77,26 +71,6 @@ class _CustomAlert extends StatelessWidget {
                     style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                   ),
                 ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: Text(msg),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _input,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Digite aqui'),
               ),
             ),
             Padding(
