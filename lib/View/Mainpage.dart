@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smokerstabacaria/Widgets/AlertInputBox_Widget.dart';
 import 'package:smokerstabacaria/Widgets/Alertbox_Widget.dart';
+import 'package:smokerstabacaria/Widgets/button_widget.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -72,15 +73,22 @@ class MainPage extends StatelessWidget {
               child: Text('dialog'),
               onPressed: () {
                 showDialogInput(
-                    context: context,
-                    title: 'Teste',
-                    body: 'motivo',
-                    cancel: 'cancel',
-                    confirm: 'confirm',
-                    color: Colors.black,
-                    );
+                  context: context,
+                  title: 'Teste',
+                  body: 'motivo',
+                  cancel: 'cancel',
+                  confirm: 'confirm',
+                  color: Colors.black,
+                );
               },
             ),
+          ),
+          ButtonWidget(
+            color: Color.fromARGB(255, 64, 255, 0),
+            text: 'teste',
+            onPressed: () {
+              print('funcionou');
+            },
           )
         ],
       ),
