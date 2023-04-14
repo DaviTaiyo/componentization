@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-//custom Dialog
+//custom Alert
 Future<bool?> showCustomDialog(
     {required BuildContext context,
     required String title,
     required String body,
-    required Color color,
     required String cancel,
     required String confirm,
     String? cancelText,
@@ -16,7 +15,7 @@ Future<bool?> showCustomDialog(
     barrierDismissible: false,
     builder: (_) {
       return _CustomAlert(
-        color: color,
+        color: Theme.of(context).primaryColor,
         title: title,
         msg: body,
         needConfirm: needConfirm,

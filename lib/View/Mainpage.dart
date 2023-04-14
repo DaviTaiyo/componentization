@@ -27,7 +27,6 @@ class MainPage extends StatelessWidget {
                   child: Text('Show Dialog ERROR'),
                   onPressed: () {
                     showCustomDialog(
-                      color: Colors.black,
                       context: context,
                       cancel: 'Cancel',
                       confirm: 'confirm',
@@ -43,7 +42,6 @@ class MainPage extends StatelessWidget {
                   child: Text('Show Dialog Confirm'),
                   onPressed: () {
                     showCustomDialog(
-                      color: Colors.black,
                       context: context,
                       cancel: 'Cancelar',
                       confirm: 'Confirmar',
@@ -59,7 +57,6 @@ class MainPage extends StatelessWidget {
                   child: Text('Teste aleatorio'),
                   onPressed: () {
                     showCustomDialog(
-                      color: Colors.black,
                       context: context,
                       cancel: 'erro aleatorio',
                       confirm: 'confirmar aleatorio',

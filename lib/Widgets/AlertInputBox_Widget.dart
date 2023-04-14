@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<bool?> showDialogInput(
+Future<String?> showDialogInput(
     {required BuildContext context,
     required String title,
     required String body,
@@ -10,7 +10,7 @@ Future<bool?> showDialogInput(
     String? cancelText,
     String? confirmText,
     bool needConfirm = true}) async {
-  return showDialog<bool>(
+  return showDialog<String>(
       context: context,
       barrierDismissible: false,
       builder: (_) {

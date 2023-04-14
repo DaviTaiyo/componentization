@@ -10,7 +10,7 @@ class ButtonWidget extends StatelessWidget {
   final bool isDisabled;
   final String text;
   final Color color;
-  final int? height;
+  final bool customSize;
   final int? width;
 
   const ButtonWidget({
@@ -20,7 +20,7 @@ class ButtonWidget extends StatelessWidget {
     this.isLoading = false,
     this.isDisabled = false,
     this.isOutline = false,
-    this.height,
+    this.customSize = false,
     this.width,
     required this.color,
     required this.text,
@@ -29,6 +29,7 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Opacity(
+      
       opacity: isDisabled ? 0.5 : 1,
       child: AbsorbPointer(
         absorbing: isDisabled || isLoading,
