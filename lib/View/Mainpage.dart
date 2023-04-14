@@ -5,6 +5,7 @@ import 'package:smokerstabacaria/Widgets/AlertConfirm_Widget.dart';
 import 'package:smokerstabacaria/Widgets/AlertError_Widget.dart';
 import 'package:smokerstabacaria/Widgets/AlertInputBox_Widget.dart';
 import 'package:smokerstabacaria/Widgets/AlertCustom_Widget.dart';
+import 'package:smokerstabacaria/Widgets/button_widget.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -68,6 +69,50 @@ class MainPage extends StatelessWidget {
                   confirm: 'confirm',
                   child: Image(image: AssetImage('images/Alert.png')),
                 );
+              },
+            ),
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: ButtonWidget(
+              color: Colors.green,
+              text: 'Button',
+              onPressed: () {
+                print('Funcionou');
+              },
+            ),
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: ButtonWidget(
+              color: Colors.blue,
+              text: 'Button Out',
+              width: 150,
+              isOutline: true,
+              onPressed: () {
+                print('também Funcionou');
+              },
+            ),
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: ButtonWidget(
+              color: Colors.green,
+              text: 'Button disabled',
+              isDisabled: true,
+              width: 200,
+              onPressed: () {},
+            ),
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: ButtonWidget(
+              color: Colors.green,
+              text: 'Button',
+              isLoading: true,
+              isOutline: true,
+              onPressed: () {
+                print('Funcionou');
               },
             ),
           )

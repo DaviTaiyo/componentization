@@ -10,8 +10,7 @@ class ButtonWidget extends StatelessWidget {
   final bool isDisabled;
   final String text;
   final Color color;
-  final bool customSize;
-  final int? width;
+  final double? width;
 
   const ButtonWidget({
     Key? key,
@@ -20,7 +19,6 @@ class ButtonWidget extends StatelessWidget {
     this.isLoading = false,
     this.isDisabled = false,
     this.isOutline = false,
-    this.customSize = false,
     this.width,
     required this.color,
     required this.text,
@@ -28,61 +26,63 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      
-      opacity: isDisabled ? 0.5 : 1,
-      child: AbsorbPointer(
-        absorbing: isDisabled || isLoading,
-        child: Container(
-          decoration: isOutline
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Colors.grey.shade600)
-              : BoxDecoration(color: Colors.grey.shade600),
-          child: TextButton(
-            key: ValueKey('kDefaultButton'),
-            onPressed: () => onPressed?.call(),
-            style: ButtonStyle(
-              minimumSize: MaterialStateProperty.all(
-                Size.fromHeight(kToolbarHeight),
-              ),
-              backgroundColor: MaterialStateProperty.all(
-                backgroundColor(context),
-              ),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: isOutline
-                      ? BorderRadius.circular(12)
-                      : BorderRadius.circular(0),
+    return Container(
+      width: width ?? double.infinity,
+      child: Opacity(
+        opacity: isDisabled ? 0.5 : 1,
+        child: AbsorbPointer(
+          absorbing: isDisabled || isLoading,
+          child: Container(
+            decoration: isOutline
+                ? BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.grey.shade600)
+                : BoxDecoration(color: Colors.grey.shade600),
+            child: TextButton(
+              key: ValueKey('kDefaultButton'),
+              onPressed: () => onPressed?.call(),
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(
+                  Size.fromHeight(kToolbarHeight),
                 ),
-              ),
-              side: MaterialStateProperty.all(border(context)),
-              visualDensity: VisualDensity.compact,
-              overlayColor: MaterialStateProperty.all(
-                Colors.grey.withOpacity(0.25),
-              ),
-              padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
-            ),
-            child: isLoading
-                ? SizedBox(
-                    key: ValueKey('kLoading'),
-                    height: 15,
-                    width: 15,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(Colors.white),
-                      color: Theme.of(context).primaryColor,
-                      strokeWidth: 1.5,
-                    ),
-                  )
-                : Text(
-                    text,
-                    key: ValueKey('kButtonText'),
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
-                          color: buttonType == ButtonType.primary
-                              ? Colors.white
-                              : Theme.of(context).primaryColor,
-                        ),
+                backgroundColor: MaterialStateProperty.all(
+                  backgroundColor(context),
+                ),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: isOutline
+                        ? BorderRadius.circular(12)
+                        : BorderRadius.circular(0),
                   ),
+                ),
+                side: MaterialStateProperty.all(border(context)),
+                visualDensity: VisualDensity.compact,
+                overlayColor: MaterialStateProperty.all(
+                  Colors.grey.withOpacity(0.25),
+                ),
+                padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
+              ),
+              child: isLoading
+                  ? SizedBox(
+                      key: ValueKey('kLoading'),
+                      height: 15,
+                      width: 15,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(Colors.white),
+                        color: Theme.of(context).primaryColor,
+                        strokeWidth: 1.5,
+                      ),
+                    )
+                  : Text(
+                      text,
+                      key: ValueKey('kButtonText'),
+                      style: Theme.of(context).textTheme.headline6!.copyWith(
+                            color: buttonType == ButtonType.primary
+                                ? Colors.white
+                                : Theme.of(context).primaryColor,
+                          ),
+                    ),
+            ),
           ),
         ),
       ),
