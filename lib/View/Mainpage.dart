@@ -72,13 +72,10 @@ class MainPage extends StatelessWidget {
               child: Text('dialog'),
               onPressed: () {
                 showDialogInput(
-                    context: context,
-                    title: 'Teste',
-                    body: 'motivo',
-                    cancel: 'cancel',
-                    confirm: 'confirm',
-                    color: Colors.black,
-                    );
+                  context: context,
+                  title: 'Teste',
+                  body: 'motivo',
+                );
               },
             ),
           )

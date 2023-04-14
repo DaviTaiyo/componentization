@@ -1,91 +1,64 @@
 import 'package:flutter/material.dart';
 
-Future<bool?> showDialogInput(
+Future<String?> showDialogInput(
     {required BuildContext context,
     required String title,
     required String body,
-    required String cancel,
-    required String confirm,
-    required Color color,
     String? cancelText,
-    String? confirmText,
-    bool needConfirm = true}) async {
-  return showDialog<bool>(
+    String? confirmText}) async {
+  return showDialog<String>(
       context: context,
       barrierDismissible: false,
       builder: (_) {
         return _CustomAlert(
-            color: color,
             title: title,
-            needConfirm: needConfirm,
             msg: body,
-            cancel: cancelText ?? cancel,
-            confirm: confirmText ?? confirm);
+            cancel: cancelText ?? 'Cancelar',
+            confirm: confirmText ?? 'Ok');
       });
 }
 
 class _CustomAlert extends StatelessWidget {
-  _CustomAlert(
-      {required this.title,
-      required this.msg,
-      required this.needConfirm,
-      required this.cancel,
-      required this.confirm,
-      required this.color,
-      this.cancelText,
-      this.confirmText});
+  _CustomAlert({
+    required this.title,
+    required this.msg,
+    required this.cancel,
+    required this.confirm,
+  });
 
-  final Color color;
   final String title;
   final String msg;
   final String cancel;
   final String confirm;
-  final bool needConfirm;
-  final String? cancelText;
-  final String? confirmText;
-  TextEditingController input = TextEditingController();
+  TextEditingController _input = TextEditingController();
 
   Widget _buttons(context) {
-    if (needConfirm) {
-      return Row(
-        children: [
-          Expanded(
-            child: SizedBox(
-              height: 45,
-              child: TextButton(
-                child: Text(cancelText ?? cancel),
-                onPressed: () => Navigator.pop(context, false),
-              ),
+    return Row(
+      children: [
+        Expanded(
+          child: SizedBox(
+            height: 45,
+            child: TextButton(
+              child: Text("Cancelar"),
+              onPressed: () {
+                _input.clear();
+                Navigator.pop(context);
+              },
             ),
           ),
-          VerticalDivider(width: 2),
-          Expanded(
-            child: SizedBox(
-              height: 45,
-              child: TextButton(
-                child: Text(confirmText ?? confirm),
-                onPressed: () => Navigator.pop(context, true),
-              ),
+        ),
+        VerticalDivider(width: 2),
+        Expanded(
+          child: SizedBox(
+            height: 45,
+            child: TextButton(
+              child: Text('Ok'),
+              onPressed: () => Navigator.pop(context),
             ),
           ),
-        ],
-      );
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: SizedBox(
-              height: 45,
-              child: TextButton(
-                child: Text('OK'),
-                onPressed: () => Navigator.pop(context, true),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
+        ),
+      ],
+    );
   }
 
   @override
@@ -94,7 +67,7 @@ class _CustomAlert extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: color,
+          color: Theme.of(context).primaryColor,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -127,7 +100,7 @@ class _CustomAlert extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                controller: input,
+                controller: _input,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(), hintText: 'Digite aqui'),
               ),
