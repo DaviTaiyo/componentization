@@ -1,19 +1,21 @@
+//custom Dialog
 import 'package:flutter/material.dart';
 
-Future<String?> showDialogInput({
+Future showErrorDialog({
   required BuildContext context,
   required String title,
-  required String body,
+  required String msg,
 }) async {
-  return showDialog<String>(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) {
-        return _CustomAlert(
-          title: title,
-          msg: body,
-        );
-      });
+  return showDialog<bool>(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) {
+      return _CustomAlert(
+        title: title,
+        msg: msg,
+      );
+    },
+  );
 }
 
 class _CustomAlert extends StatelessWidget {
@@ -24,36 +26,19 @@ class _CustomAlert extends StatelessWidget {
 
   final String title;
   final String msg;
-  TextEditingController _input = TextEditingController();
 
   Widget _buttons(context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                height: 45,
-                child: TextButton(
-                  child: Text("Cancelar"),
-                  onPressed: () {
-                    _input.clear();
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
+        Expanded(
+          child: SizedBox(
+            height: 45,
+            child: TextButton(
+              child: Text('OK'),
+              onPressed: () => Navigator.pop(context),
             ),
-            VerticalDivider(width: 2),
-            Expanded(
-              child: SizedBox(
-                height: 45,
-                child: TextButton(
-                  child: Text('Ok'),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ],
     );
@@ -91,16 +76,8 @@ class _CustomAlert extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(msg),
-                  ),
+                  )
                 ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _input,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Digite aqui'),
               ),
             ),
             Padding(

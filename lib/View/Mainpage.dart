@@ -1,9 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smokerstabacaria/Widgets/AlertConfirm_Widget.dart';
+import 'package:smokerstabacaria/Widgets/AlertError_Widget.dart';
 import 'package:smokerstabacaria/Widgets/AlertInputBox_Widget.dart';
-import 'package:smokerstabacaria/Widgets/Alertbox_Widget.dart';
-import 'package:smokerstabacaria/Widgets/button_widget.dart';
+import 'package:smokerstabacaria/Widgets/AlertCustom_Widget.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -15,109 +16,62 @@ class MainPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Smokers Tabacaria'),
+        title: Text('Componentization'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 10),
-            Text('Nome'),
-            Center(
-              child: TextButton(
-                  child: Text('Show Dialog ERROR'),
-                  onPressed: () {
-                    showCustomDialog(
-                      context: context,
-                      cancel: 'Cancel',
-                      confirm: 'confirm',
-                      title: 'Error',
-                      body: '${Error}',
-                      needConfirm: false,
-                    );
-                  }),
+      body: Column(
+        children: [
+          Center(
+            child: TextButton(
+              child: Text('Confirm Alert'),
+              onPressed: () {
+                showConfirmDialog(context: context, title: 'Are you sure?');
+              },
             ),
-            SizedBox(height: 10),
-            Center(
-              child: TextButton(
-                  child: Text('Show Dialog Confirm'),
-                  onPressed: () {
-                    showCustomDialog(
-                      context: context,
-                      cancel: 'Cancelar',
-                      confirm: 'Confirmar',
-                      title: 'are you sure ?',
-                      body: 'are you sure you want to confirm?',
-                      needConfirm: true,
-                    );
-                  }),
-            ),
-            SizedBox(height: 10),
-            Center(
-              child: TextButton(
-                  child: Text('Teste aleatorio'),
-                  onPressed: () {
-                    showCustomDialog(
-                      context: context,
-                      cancel: 'erro aleatorio',
-                      confirm: 'confirmar aleatorio',
-                      title: 'titulo aleatorio',
-                      body: 'body aleatorio',
-                      needConfirm: true,
-                    );
-                  }),
-            ),
-            SizedBox(height: 10),
-            Center(
-              child: TextButton(
-                child: Text('dialog'),
-                onPressed: () {
-                  showDialogInput(
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: TextButton(
+              child: Text('Alert Error'),
+              onPressed: () {
+                showErrorDialog(
                     context: context,
-                    title: 'Teste',
-                    body: 'motivo',
-                    cancel: 'cancel',
-                    confirm: 'confirm',
-                    color: Colors.black,
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 20),
-            ButtonWidget(
-              color: Color.fromARGB(255, 64, 255, 0),
-              text: 'botão preenchido',
-              onPressed: () {
-                print('funcionou');
+                    title: 'Error!!',
+                    msg: 'Error in this Alert');
               },
             ),
-            SizedBox(height: 10),
-            ButtonWidget(
-              color: Color.fromRGBO(0, 85, 255, 1),
-              text: 'Botão com tamanho',
-              isOutline: true,
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: TextButton(
+              child: Text('Input Alert'),
               onPressed: () {
-                print('também funciona');
+                showDialogInput(
+                  context: context,
+                  title: 'Teste',
+                  body: 'motivo',
+                );
               },
             ),
-            SizedBox(height: 10),
-            ButtonWidget(
-              color: Colors.black,
-              text: 'botão desativado',
-              isDisabled: true,
-              onPressed: () {},
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: TextButton(
+              child: Text('Custom Alert'),
+              onPressed: () {
+                showCustomDialog(
+                  context: context,
+                  title: 'Custom Alert',
+                  body: 'This is a Custom Alert',
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  cancel: 'cancel',
+                  confirm: 'confirm',
+                  child: Image(image: AssetImage('images/Alert.png')),
+                );
+              },
             ),
-            SizedBox(
-              height: 10,
-            ),
-            ButtonWidget(
-              color: Colors.yellow,
-              text: 'botão carregando',
-              isLoading: true,
-              isOutline: true,
-              onPressed: () {},
-            ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
