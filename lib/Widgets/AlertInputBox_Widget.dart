@@ -27,29 +27,33 @@ class _CustomAlert extends StatelessWidget {
   TextEditingController _input = TextEditingController();
 
   Widget _buttons(context) {
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: SizedBox(
-            height: 45,
-            child: TextButton(
-              child: Text("Cancelar"),
-              onPressed: () {
-                _input.clear();
-                Navigator.pop(context);
-              },
+        Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                height: 45,
+                child: TextButton(
+                  child: Text("Cancelar"),
+                  onPressed: () {
+                    _input.clear();
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
             ),
-          ),
-        ),
-        VerticalDivider(width: 2),
-        Expanded(
-          child: SizedBox(
-            height: 45,
-            child: TextButton(
-              child: Text('Ok'),
-              onPressed: () => Navigator.pop(context),
+            VerticalDivider(width: 2),
+            Expanded(
+              child: SizedBox(
+                height: 45,
+                child: TextButton(
+                  child: Text('Ok'),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ],
     );

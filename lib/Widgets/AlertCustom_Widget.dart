@@ -8,6 +8,8 @@ Future<bool?> showCustomDialog(
     required Color color,
     required String cancel,
     required String confirm,
+    final Widget? child,
+    final Color? textColor,
     String? cancelText,
     String? confirmText,
     bool needConfirm = true}) async {
@@ -17,6 +19,8 @@ Future<bool?> showCustomDialog(
     builder: (_) {
       return _CustomAlert(
         color: color,
+        textColor: textColor,
+        child: child,
         title: title,
         msg: body,
         needConfirm: needConfirm,
@@ -37,9 +41,11 @@ class _CustomAlert extends StatelessWidget {
       required this.cancel,
       required this.confirm,
       required this.color,
+      this.textColor,
+      this.child,
       this.cancelText,
       this.confirmText});
-
+  final Color? textColor;
   final Color color;
   final String title;
   final String msg;
@@ -48,6 +54,7 @@ class _CustomAlert extends StatelessWidget {
   final bool needConfirm;
   final String? cancelText;
   final String? confirmText;
+  final Widget? child;
 
   Widget _buttons(context) {
     if (needConfirm) {
@@ -57,7 +64,10 @@ class _CustomAlert extends StatelessWidget {
             child: SizedBox(
               height: 45,
               child: TextButton(
-                child: Text(cancelText ?? cancel),
+                child: Text(
+                  cancelText ?? cancel,
+                  style: TextStyle(color: textColor),
+                ),
                 onPressed: () => Navigator.pop(context, false),
               ),
             ),
@@ -67,7 +77,10 @@ class _CustomAlert extends StatelessWidget {
             child: SizedBox(
               height: 45,
               child: TextButton(
-                child: Text(confirmText ?? confirm),
+                child: Text(
+                  confirmText ?? confirm,
+                  style: TextStyle(color: textColor),
+                ),
                 onPressed: () => Navigator.pop(context, true),
               ),
             ),
@@ -82,7 +95,10 @@ class _CustomAlert extends StatelessWidget {
             child: SizedBox(
               height: 45,
               child: TextButton(
-                child: Text('OK'),
+                child: Text(
+                  'Ok',
+                  style: TextStyle(color: textColor),
+                ),
                 onPressed: () => Navigator.pop(context, true),
               ),
             ),
@@ -111,7 +127,10 @@ class _CustomAlert extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.w600,
+                        color: textColor),
                   ),
                 ],
               ),
@@ -123,9 +142,22 @@ class _CustomAlert extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Flexible(
-                    child: Text(msg),
+                    child: Text(
+                      msg,
+                      style: TextStyle(color: textColor),
+                    ),
                   )
                 ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Material(
+                  color: Colors.transparent,
+                  child: child,
+                ),
               ),
             ),
             Padding(

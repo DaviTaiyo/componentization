@@ -51,6 +51,24 @@ class MainPage extends StatelessWidget {
                 );
               },
             ),
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: TextButton(
+              child: Text('Custom Alert'),
+              onPressed: () {
+                showCustomDialog(
+                  context: context,
+                  title: 'Custom Alert',
+                  body: 'This is a Custom Alert',
+                  color: Colors.white,
+                  textColor: Colors.black,
+                  cancel: 'cancel',
+                  confirm: 'confirm',
+                  child: Image(image: AssetImage('images/Alert.png')),
+                );
+              },
+            ),
           )
         ],
       ),
