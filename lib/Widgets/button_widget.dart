@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:smokerstabacaria/Core/Enums/Button_size.dart';
+import 'package:smokerstabacaria/utils/mapping_Colors.dart';
 
 import '../Core/Enums/Button_type.dart';
 
 class ButtonWidget extends StatelessWidget {
   final ButtonType buttonType;
+  final ButtonSize? width;
   final Function? onPressed;
   final bool isOutline;
   final bool isLoading;
   final bool isDisabled;
-  final String text;
-  final Color color;
-  final double? width;
+  final String? text;
+  final IconData? iconR;
+  final IconData? iconL;
 
   const ButtonWidget({
     Key? key,
     this.buttonType = ButtonType.primary,
+    this.width,
     this.onPressed,
     this.isLoading = false,
     this.isDisabled = false,
     this.isOutline = false,
-    this.width,
-    required this.color,
-    required this.text,
+    this.iconR,
+    this.iconL,
+    this.text,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? double.infinity,
+      width: _getWidth(),
       child: Opacity(
         opacity: isDisabled ? 0.5 : 1,
         child: AbsorbPointer(
@@ -36,7 +40,7 @@ class ButtonWidget extends StatelessWidget {
             decoration: isOutline
                 ? BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.grey.shade600)
+                    color: Color(ColorsConstants.smokers))
                 : BoxDecoration(color: Colors.grey.shade600),
             child: TextButton(
               key: ValueKey('kDefaultButton'),
@@ -58,7 +62,7 @@ class ButtonWidget extends StatelessWidget {
                 side: MaterialStateProperty.all(border(context)),
                 visualDensity: VisualDensity.compact,
                 overlayColor: MaterialStateProperty.all(
-                  Colors.grey.withOpacity(0.25),
+                  Color(ColorsConstants.smokers).withOpacity(0.25),
                 ),
                 padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
               ),
@@ -73,14 +77,23 @@ class ButtonWidget extends StatelessWidget {
                         strokeWidth: 1.5,
                       ),
                     )
-                  : Text(
-                      text,
-                      key: ValueKey('kButtonText'),
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: buttonType == ButtonType.primary
-                                ? Colors.white
-                                : Theme.of(context).primaryColor,
-                          ),
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        iconL != null ? Icon(iconL) : SizedBox(),
+                        Text(
+                          text ?? '',
+                          key: ValueKey('kButtonText'),
+                          style:
+                              Theme.of(context).textTheme.headline6!.copyWith(
+                                    color: buttonType == ButtonType.primary
+                                        ? Colors.white
+                                        : Theme.of(context).primaryColor,
+                                  ),
+                        ),
+                        iconR != null ? Icon(iconR) : SizedBox()
+                      ],
                     ),
             ),
           ),
@@ -89,12 +102,27 @@ class ButtonWidget extends StatelessWidget {
     );
   }
 
+  double _getWidth() {
+    switch (width) {
+      case ButtonSize.small:
+        return 100.0;
+      case ButtonSize.medium:
+        return 200.0;
+      case ButtonSize.large:
+        return 300.0;
+      default:
+        return double.infinity;
+    }
+  }
+
   Color backgroundColor(BuildContext context) {
     switch (buttonType) {
       case ButtonType.primary:
-        return color;
+        return Color(ColorsConstants.smokers);
+      case ButtonType.secondary:
+        return Color(ColorsConstants.black);
       default:
-        return Colors.white;
+        return Color(ColorsConstants.light);
     }
   }
 

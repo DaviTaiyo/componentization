@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smokerstabacaria/Core/Enums/Button_size.dart';
 import 'package:smokerstabacaria/Widgets/AlertConfirm_Widget.dart';
 import 'package:smokerstabacaria/Widgets/AlertError_Widget.dart';
 import 'package:smokerstabacaria/Widgets/AlertInputBox_Widget.dart';
@@ -75,8 +76,8 @@ class MainPage extends StatelessWidget {
           SizedBox(height: 10),
           Center(
             child: ButtonWidget(
-              color: Colors.green,
-              text: 'Button',
+              iconL: Icons.play_arrow,
+              text: ' PLAY',
               onPressed: () {
                 print('Funcionou');
               },
@@ -85,9 +86,8 @@ class MainPage extends StatelessWidget {
           SizedBox(height: 10),
           Center(
             child: ButtonWidget(
-              color: Colors.blue,
-              text: 'Button Out',
-              width: 150,
+              text: 'Verificação ',
+              iconR: Icons.check,
               isOutline: true,
               onPressed: () {
                 print('também Funcionou');
@@ -97,22 +97,32 @@ class MainPage extends StatelessWidget {
           SizedBox(height: 10),
           Center(
             child: ButtonWidget(
-              color: Colors.green,
-              text: 'Button disabled',
               isDisabled: true,
-              width: 200,
+              iconR: Icons.check,
+              width: ButtonSize.small,
               onPressed: () {},
             ),
           ),
           SizedBox(height: 10),
           Center(
             child: ButtonWidget(
-              color: Colors.green,
               text: 'Button',
               isLoading: true,
               isOutline: true,
+              width: ButtonSize.medium,
               onPressed: () {
                 print('Funcionou');
+              },
+            ),
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: ButtonWidget(
+              text: 'Notifications',
+              isOutline: true,
+              width: ButtonSize.large,
+              onPressed: () {
+                print('teste size');
               },
             ),
           )
