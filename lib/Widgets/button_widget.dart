@@ -14,6 +14,8 @@ class ButtonWidget extends StatelessWidget {
   final String? text;
   final IconData? iconR;
   final IconData? iconL;
+  final bool badget;
+  final int? badgetData;
 
   const ButtonWidget({
     Key? key,
@@ -23,6 +25,8 @@ class ButtonWidget extends StatelessWidget {
     this.isLoading = false,
     this.isDisabled = false,
     this.isOutline = false,
+    this.badget = false,
+    this.badgetData,
     this.iconR,
     this.iconL,
     this.text,
@@ -92,7 +96,27 @@ class ButtonWidget extends StatelessWidget {
                                         : Theme.of(context).primaryColor,
                                   ),
                         ),
-                        iconR != null ? Icon(iconR) : SizedBox()
+                        iconR != null ? Icon(iconR) : SizedBox(),
+                        badget == true
+                            ? Container(
+                                alignment: Alignment.center,
+                                height: 22,
+                                width: 22,
+                                decoration: BoxDecoration(
+                                  color: Color(ColorsConstants.light),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  badgetData == null
+                                      ? '0'
+                                      : badgetData.toString(),
+                                  style: TextStyle(
+                                    color: Color(ColorsConstants.black),
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              )
+                            : SizedBox()
                       ],
                     ),
             ),

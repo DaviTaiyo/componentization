@@ -7,6 +7,7 @@ import 'package:smokerstabacaria/Widgets/AlertError_Widget.dart';
 import 'package:smokerstabacaria/Widgets/AlertInputBox_Widget.dart';
 import 'package:smokerstabacaria/Widgets/AlertCustom_Widget.dart';
 import 'package:smokerstabacaria/Widgets/button_widget.dart';
+import 'package:smokerstabacaria/mock/mock.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -118,14 +119,28 @@ class MainPage extends StatelessWidget {
           SizedBox(height: 10),
           Center(
             child: ButtonWidget(
-              text: 'Notifications',
+              text: 'Notifications ',
+              badget: true,
+              badgetData: valueNotice.value,
               isOutline: true,
               width: ButtonSize.large,
               onPressed: () {
                 print('teste size');
               },
             ),
-          )
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: ButtonWidget(
+              text: 'Mensagens ',
+              badget: true,
+              isOutline: true,
+              width: ButtonSize.medium,
+              onPressed: () {
+                print('teste size');
+              },
+            ),
+          ),
         ],
       ),
     );
